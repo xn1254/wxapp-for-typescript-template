@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-08-18 09:44:44
- * @LastEditTime: 2021-08-31 17:27:06
+ * @LastEditTime: 2021-09-02 14:59:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \宝姐珠宝\miniprogramRoot\gulpfile.js
@@ -30,6 +30,7 @@ const minify = composer(uglifyjs, console);
 const prettyData = require('gulp-pretty-data');
 const gulpI18nWxml = require('@miniprogram-i18n/gulp-i18n-wxml');
 const gulpI18nLocales = require('@miniprogram-i18n/gulp-i18n-locales');
+const preprocess = require('gulp-preprocess')
 // const filter = require('gulp-filter');
 
 const resolve = (...args) => path.resolve(__dirname, ...args);
@@ -167,6 +168,7 @@ const ts = (cb) => {
 const js = () => gulp
   .src(globs.js, { ...srcOptions, since: since(js) })
   .pipe(mpNpm(mpNpmOptions)) // 分析依赖
+  .pipe(preprocess())
   .pipe(gulp.dest(dist));
 
 /** `gulp json`
